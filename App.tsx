@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Send, Menu, Plus, MessageSquare, AlertTriangle } from 'lucide-react';
 import { Message, ExecuteRequest, ExecuteResponse } from './types';
-import { executeAgent, checkServiceStatus } from './services/mockAgentService';
+import { executeAgent, checkServiceStatus } from './services/api';
 import { MessageBubble } from './components/Chat/MessageBubble';
 import { Loader } from './components/ui/Loader';
 import clsx from 'clsx';
