@@ -1,0 +1,5 @@
+{
+  "name": "Aegis Chat",
+  "description": "A conversational agent interface featuring multi-turn dialogue, dynamic forms, and structured data visualization.",
+  "requestFramePermissions": []
+}
