@@ -1,8 +1,10 @@
 import { ExecuteRequest, ExecuteResponse } from '../types';
 
+const API_BASE_URL = 'http://localhost:8080';
+
 export const executeAgent = async (request: ExecuteRequest): Promise<ExecuteResponse> => {
   try {
-    const response = await fetch('/api/agent/execute', {
+    const response = await fetch(`${API_BASE_URL}/api/agent/execute`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -13,7 +15,8 @@ export const executeAgent = async (request: ExecuteRequest): Promise<ExecuteResp
     if (!response.ok) {
       let errorMessage = `HTTP Error ${response.status}`;
       try {
-        const errorBody = await response.json();
+        // Use clone() to prevent "body stream already read" error if json() fails
+        const errorBody = await response.clone().json();
         if (errorBody.message || errorBody.error) {
           errorMessage = errorBody.message || errorBody.error;
         }
@@ -40,9 +43,7 @@ export const executeAgent = async (request: ExecuteRequest): Promise<ExecuteResp
 
 export const checkServiceStatus = async () => {
   try {
-    // Attempt to check service health. 
-    // If /api/health is not implemented, this might 404 or fail, which is handled.
-    const response = await fetch('/api/health');
+    const response = await fetch(`${API_BASE_URL}/api/health`);
     return { available: response.ok };
   } catch (error) {
     console.warn('Health check failed:', error);
